@@ -5,7 +5,7 @@
 
 This is a rails app for the Ophelos Take Home Test.
 
-Live Demo at:   
+Live Demo at: [Link](http://incomeandexpenditureapplication-env.eba-zj6xntqa.eu-west-2.elasticbeanstalk.com/)
 
 (User Views Styling not completed)
 
