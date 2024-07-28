@@ -5,7 +5,7 @@
       <td>£<%= sprintf("%.2f", statement.disposable_income.to_f) %></td>
       <td><%= statement.rating %></td>
       <td><%= statement.month.strftime("%B %Y")%></td>
-      <td>James</td>
+      <td><%= statement.user.email %></td>
     </tr>
   </tbody>
 </div>
