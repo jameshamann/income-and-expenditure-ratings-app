@@ -1,10 +1,100 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
+  <p style="color: green"><%= notice %></p>
 
-<%= render @statement %>
+  <div class="row mb-3 align-items-center">
+    <div class="col mb-4">
+      <h1 class="text-base font-semibold leading-7 text-gray-900">Statement Details</h1>
+    </div>
+    <div class="col text-end mb-4">
+      <%= link_to "Back to statements", statements_path, class: "btn btn-secondary card-button" %>
+      <%= link_to "Edit statement", edit_statement_path(@statement), class: "btn btn-primary card-button" %>
+    </div>
+  </div>
 
-<div>
-  <%= link_to "Edit this statement", edit_statement_path(@statement) %> |
-  <%= link_to "Back to statements", statements_path %>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Income</h5>
+          <table class="table statementTable">
+            <thead>
+              <tr>
+                <th scope="col">Income Name</th>
+                <th scope="col">Income Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @statement.income.each do |index, income| %>
+                <tr>
+                  <td><%= income['name'] %></td>
+                  <td>£<%= sprintf("%.2f", income['value'].to_f) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Total Income</th>
+                <th>£<%= sprintf("%.2f", @statement.total_income) %></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Expenditure</h5>
+          <table class="table statementTable">
+            <thead>
+              <tr>
+                <th scope="col">Expenditure Name</th>
+                <th scope="col">Expenditure Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @statement.expenditure.each do |index, expenditure| %>
+                <tr>
+                  <td><%= expenditure['name'] %></td>
+                  <td>£<%= sprintf("%.2f", expenditure['value'].to_f) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>Total Expenditure</th>
+                <th>£<%= sprintf("%.2f", @statement.total_expenditure) %></th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <%= button_to "Destroy this statement", @statement, method: :delete %>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Summary</h5>
+          <table class="table">
+            <tbody>
+              <tr>
+                <th scope="row">Total Disposable Income</th>
+                <td>£<%= sprintf("%.2f", @statement.total_income - @statement.total_expenditure) %></td>
+              </tr>
+              <tr>
+                <th scope="row">Rating</th>
+                <td><%= @statement.rating %></td>
+              </tr>
+              <tr>
+                <th scope="row">Ratio</th>
+                <td><%= (@statement.ratio*100).round(2) %> %</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

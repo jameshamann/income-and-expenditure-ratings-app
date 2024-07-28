@@ -1,8 +1,7 @@
 <%= form_with(model: statement) do |form| %>
   <% if statement.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(statement.errors.count, "error") %> prohibited this statement from being saved:</h2>
-
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><%= pluralize(statement.errors.count, "error") %> prohibited this statement from being saved:</h4>
       <ul>
         <% statement.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,7 +10,40 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.submit %>
+  <div class="statementFields" data-controller="statements">
+    <div class="mb-3">
+      <%= form.label :month, class: 'form-label' %>
+      <%= form.date_field :month, class: 'form-control' %>
+    </div>
+
+    <div class="mb-3">
+      <h5>Incomes</h5>
+      <div id="income-fields" data-statements-target="incomeFields">
+        <div class="incomeField input-group mb-3">
+          <span class="input-group-text">Income Name</span>
+          <%= form.text_field 'income[0][name]', class: 'form-control' %>
+          <span class="input-group-text">£</span>
+          <%= form.text_field 'income[0][value]', class: 'form-control', step: 0.01, placeholder: '0.00', type:'number' %>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary mb-3" data-action="statements#addIncomeField">Add Income</button>
+    </div>
+
+    <div class="mb-3">
+      <h5>Expenditures</h5>
+      <div id="expenditure-fields" data-statements-target="expenditureFields">
+        <div class="expenditureField input-group mb-3">
+          <span class="input-group-text">Expenditure Name</span>
+          <%= form.text_field 'expenditure[0][name]', class: 'form-control' %>
+          <span class="input-group-text">£</span>
+          <%= form.text_field 'expenditure[0][value]', class: 'form-control', step:0.01, placeholder: '0.00', type:'number' %>
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary mb-3" data-action="statements#addExpenditureField">Add Expenditure</button>
+    </div>
+
+    <div>
+      <%= form.submit 'Save Statement', class: "btn btn-primary mb-3" %>
+    </div>
   </div>
 <% end %>

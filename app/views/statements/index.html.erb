@@ -1,14 +1,36 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-5">
 
-<h1>Statements</h1>
+  <p style="color: green"><%= notice %></p>
 
-<div id="statements">
-  <% @statements.each do |statement| %>
-    <%= render statement %>
-    <p>
-      <%= link_to "Show this statement", statement %>
-    </p>
-  <% end %>
+  <div class="row mb-3 align-items-center">
+    <div class="col mb-4">
+      <h1 class="text-base font-semibold leading-7 text-gray-900">Statements</h1>
+    </div>
+  
+    <div class="col text-end mb-4">
+      <%= link_to "New statement", new_statement_path, class: "btn btn-secondary card-button" %>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <table class="table statementTable">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Disposeable Income</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Month</th>
+            <th scope="col">User</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @statements.each do |statement| %>
+            <%= render statement %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>
-
-<%= link_to "New statement", new_statement_path %>

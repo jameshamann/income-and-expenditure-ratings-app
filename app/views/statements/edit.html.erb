@@ -1,10 +1,15 @@
-<h1>Editing statement</h1>
+<div class="container mt-5 contentContainer">
+      <div class="row">
+      <div class="col-auto">
+            <%= link_to "Back to statements", statements_path, class: "btn btn-secondary" %>
+          </div>
+        <div class="col-auto">
+        
+          <h1 class="mb-4">Edit Statement</h1>
+            <%= link_to "Show this statement", @statement, class: 'btn btn-secondary' %>
 
-<%= render "form", statement: @statement %>
-
-<br>
-
-<div>
-  <%= link_to "Show this statement", @statement %> |
-  <%= link_to "Back to statements", statements_path %>
-</div>
+          <%= render "form", statement: @statement %>
+          
+        </div>
+      </div>
+    </div>
