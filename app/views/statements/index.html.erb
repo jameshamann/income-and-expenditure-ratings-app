@@ -1,12 +1,13 @@
 <div class="container mt-5">
 
   <p style="color: green"><%= notice %></p>
+<%= button_to "Log out", destroy_user_session_path, method: :delete,class: "btn btn-primary card-button logoutButton"  %>
 
   <div class="row mb-3 align-items-center">
     <div class="col mb-4">
       <h1 class="text-base font-semibold leading-7 text-gray-900">Statements</h1>
     </div>
-  
+    
     <div class="col text-end mb-4">
       <%= link_to "New statement", new_statement_path, class: "btn btn-secondary card-button" %>
     </div>
