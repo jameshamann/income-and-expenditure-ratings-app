@@ -3,7 +3,9 @@ class Statement < ApplicationRecord
     before_save do
         self.total_income = save_totals(self.income)
         self.total_expenditure = save_totals(self.expenditure)
-        puts self.total_income
+        self.disposable_income = self.total_income - self.total_expenditure
+        self.ratio = total_expenditure/total_income
+        self.rating = return_rating
     end
 
    
@@ -21,6 +23,19 @@ class Statement < ApplicationRecord
             end
         end
         return totals
+    end
+
+    def return_rating
+        case self.ratio
+        when 0..0.1
+          "A"
+        when 0.1..0.3
+          "B"
+        when 0.3..0.5
+          "C"
+        else
+          "D"
+        end
     end
 
 end

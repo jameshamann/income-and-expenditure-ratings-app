@@ -21,4 +21,22 @@ RSpec.describe Statement, type: :model do
     statement = Statement.create(income: {"0":{name: "Salary", value:1000.00},"1":{name: "Dividents", value:150.50}}, expenditure: {"0":{name: "Rent", value: 100.00},"1":{name: "Food", value: 250.43}}, month: '2024-07-01')
     expect(statement.total_expenditure).to eq 350.43
    end
-end
+
+   it 'calculates the disposable income' do 
+    statement = Statement.create(income: {"0":{name: "Salary", value:1000.00},"1":{name: "Dividents", value:150.50}}, expenditure: {"0":{name: "Rent", value: 100.00},"1":{name: "Food", value: 250.43}}, month: '2024-07-01')
+    expect(statement.disposable_income.round(2)).to eq 800.07
+   
+   end
+
+   it 'calculates the ratio percent for the rating' do 
+    statement = Statement.create(income: {"0":{name: "Salary", value:1000.00},"1":{name: "Dividents", value:150.50}}, expenditure: {"0":{name: "Rent", value: 100.00},"1":{name: "Food", value: 250.43}}, month: '2024-07-01')
+    expect(statement.ratio.round(2)).to eq 0.30
+   
+   end
+
+   it 'calculates the rating' do 
+    statement = Statement.create(income: {"0":{name: "Salary", value:1000.00},"1":{name: "Dividents", value:150.50}}, expenditure: {"0":{name: "Rent", value: 100.00},"1":{name: "Food", value: 250.43}}, month: '2024-07-01')
+    expect(statement.rating).to eq "C"
+   end
+
+   end
