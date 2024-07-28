@@ -3,7 +3,7 @@ class StatementsController < ApplicationController
 
   # GET /statements
   def index
-    @statements = Statement.all
+    @statements = current_user.statements.search_by_month(params[:search])
   end
 
   # GET /statements/1

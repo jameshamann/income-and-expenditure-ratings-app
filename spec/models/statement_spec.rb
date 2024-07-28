@@ -57,5 +57,4 @@ RSpec.describe Statement, type: :model do
     statement = Statement.create(income: {"0":{name: "Salary", value:1000.00},"1":{name: "Dividents", value:150.50}}, expenditure: {"0":{name: "Rent", value: 100.00},"1":{name: "Food", value: 250.43}}, month: '2024-07-01',user_id:1)
     expect(statement.rating).to eq "C"
    end
-
    end

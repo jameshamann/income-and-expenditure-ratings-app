@@ -39,4 +39,14 @@ class Statement < ApplicationRecord
         end
     end
 
+    def self.search_by_month(date)
+      if date.nil? || date.empty?
+          self.all
+      else 
+          statement_month = date.to_date
+          self.where(month: statement_month.beginning_of_month..statement_month.end_of_month)
+      end
+  end
+
+
 end

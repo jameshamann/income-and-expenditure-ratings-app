@@ -7,7 +7,16 @@
     <div class="col mb-4">
       <h1 class="text-base font-semibold leading-7 text-gray-900">Statements</h1>
     </div>
-    
+    <div  class="col text-end">
+    <%= form_with url: "/statements", method: :get do |form| %>
+      <div class="input-group">
+        <span class="input-group-text">Select</span>
+        <%= form.date_field :search, placeholder: "Search", name: 'search', class: "form-control" %>
+        <%= form.submit "Search",  method:'get', class:'btn btn-primary' %>
+      </div>
+      <div class='form-text'>Search your Income and Expenditure Statements by Month</div>
+    <% end %>
+    </div>
     <div class="col text-end mb-4">
       <%= link_to "New statement", new_statement_path, class: "btn btn-secondary card-button" %>
     </div>
