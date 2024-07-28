@@ -36,6 +36,10 @@ Requirements:
 * Ruby 3.2.2
 * Postgresql (for database)
 
+#### Run Tests
+
+To see the tests run simply run `rspec` in your command line.
+
 Basic Setup:
 
 To run locally, clone this repo into your directory and follow the below steps:
