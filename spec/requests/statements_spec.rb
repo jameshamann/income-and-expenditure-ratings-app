@@ -18,7 +18,7 @@ RSpec.describe "/statements", type: :request do
   # Statement. As you add validations to Statement, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {income:{"0":{name: 'Salary', value: 5000.00}}, expenditure:{"0":{name: 'Car', value: 4000.00}}, month: '2024-01-01'}
+    {income:{"0":{name: 'Salary', value: 5000.00}, "1":{name:'Divient', value:101.00}}, expenditure:{"0":{name: 'Car', value: 4000.00}}, month: '2024-01-01'}
   } 
 
   let(:invalid_attributes) {
