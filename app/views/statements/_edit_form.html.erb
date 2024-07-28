@@ -1,0 +1,57 @@
+<%= form_with(model: statement) do |form| %>
+  <% if statement.errors.any? %>
+    <div class="alert alert-danger">
+      <h4 class="alert-heading"><%= pluralize(statement.errors.count, "error") %> prohibited this statement from being saved:</h4>
+      <ul>
+        <% statement.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="statementFields" data-controller="statements">
+    <div class="mb-3">
+      <%= form.label :period, class: 'form-label' %>
+      <%= form.date_field :period, class: 'form-control' %>
+    </div>
+
+    <div class="mb-3">
+      <h5>Incomes</h5>
+      <div id="income-fields" data-statements-target="incomeFields">
+        <% @statement.income.each do |index, income| %>
+          <div class="incomeField input-group mb-3">
+            <span class="input-group-text">Income Name</span>
+            <%= form.text_field "income[#{index}][name]", value: income['name'], class: 'form-control' %>
+            <span class="input-group-text">£</span>
+            <%= form.text_field "income[#{index}][value]", value: income['value'], class: 'form-control', step: 0.01, placeholder: '0.00', type: 'number' %>
+            <button type="button" class="btn btn-danger mb-3 formButtons" data-action="statements#removeIncomeField">Remove Income</button>
+          </div>
+        <% end %>
+        
+      </div>
+      <button type="button" class="btn btn-secondary mb-3" data-action="statements#addIncomeField">Add Income</button>
+    </div>
+
+    <div class="mb-3">
+      <h5>Expenditures</h5>
+      <div id="expenditure-fields" data-statements-target="expenditureFields">
+        <% @statement.expenditure.each do |index,expenditure| %>
+          <div class="expenditureField input-group mb-3">
+            <span class="input-group-text">Expenditure Name</span>
+            <%= form.text_field "expenditure[#{index}][name]", value: expenditure['name'], class: 'form-control' %>
+            <span class="input-group-text">£</span>
+            <%= form.text_field "expenditure[#{index}][value]", value: expenditure['value'], class: 'form-control', step: 0.01, placeholder: '0.00', type: 'number' %>
+            <button type="button" class="btn btn-danger mb-3 formButtons" data-action="statements#removeExpenditureField">Remove Expenditure</button>
+          </div>
+        <% end %>
+       
+      </div>
+      <button type="button" class="btn btn-secondary mb-3" data-action="statements#addExpenditureField">Add Expenditure</button>
+    </div>
+
+    <div>
+      <%= form.submit 'Save Statement', class: "btn btn-primary mb-3" %>
+    </div>
+  </div>
+<% end %>
