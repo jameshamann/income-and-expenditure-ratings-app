@@ -13,12 +13,15 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/statements", type: :request do
-  
+  before(:each) do
+    user = User.create(id: 1, email:'test@example.com', password: 'hello1234')
+    sign_in user
+  end
   # This should return the minimal set of attributes required to create a valid
   # Statement. As you add validations to Statement, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {income:{"0":{name: 'Salary', value: 5000.00}, "1":{name:'Divient', value:101.00}}, expenditure:{"0":{name: 'Car', value: 4000.00}}, month: '2024-01-01'}
+    {income:{"0":{name: 'Salary', value: 5000.00}, "1":{name:'Divient', value:101.00}}, expenditure:{"0":{name: 'Car', value: 4000.00}}, month: '2024-01-01', user_id:1}
   } 
 
   let(:invalid_attributes) {

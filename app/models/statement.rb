@@ -1,5 +1,6 @@
 class Statement < ApplicationRecord
     validates :income, :expenditure, :month, presence: true
+    belongs_to :user
     before_save do
         self.total_income = save_totals(self.income)
         self.total_expenditure = save_totals(self.expenditure)

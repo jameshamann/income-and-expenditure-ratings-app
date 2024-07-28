@@ -22,7 +22,7 @@ class StatementsController < ApplicationController
   # POST /statements
   def create
     @statement = Statement.new(statement_params)
-
+    @statement.user = current_user
     if @statement.save
       redirect_to @statement, notice: "Statement was successfully created."
     else
