@@ -14,10 +14,15 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
+
+
 RSpec.configure do |config|
   # For Devise > 4.1.1
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Rails.application.routes.url_helpers
+  config.include Devise::Test::IntegrationHelpers, type: :system
+
   # Use the following instead if you are on Devise <= 4.1.1
   # config.include Devise::TestHelpers, :type => :controller
 end

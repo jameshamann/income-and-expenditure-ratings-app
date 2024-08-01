@@ -20,9 +20,9 @@
       <h5>Incomes</h5>
       <div id="income-fields" data-statements-target="incomeFields">
         <div class="incomeField input-group mb-3">
-          <span class="input-group-text">Income Name</span>
+          <%= form.label 'income[0][name]', "Income Name", class: 'form-label' %>
           <%= form.text_field 'income[0][name]', class: 'form-control' %>
-          <span class="input-group-text">£</span>
+          <%= form.label 'income[0][value]', "Income Value", class: 'form-label' %>
           <%= form.text_field 'income[0][value]', class: 'form-control', step: 0.01, placeholder: '0.00', type:'number' %>
         </div>
       </div>
@@ -33,9 +33,9 @@
       <h5>Expenditures</h5>
       <div id="expenditure-fields" data-statements-target="expenditureFields">
         <div class="expenditureField input-group mb-3">
-          <span class="input-group-text">Expenditure Name</span>
+         <%= form.label 'expenditure[0][name]', "Expenditure Name", class: 'form-label' %>
           <%= form.text_field 'expenditure[0][name]', class: 'form-control' %>
-          <span class="input-group-text">£</span>
+          <%= form.label 'expenditure[0][value]', "Expenditure Value", class: 'form-label' %>
           <%= form.text_field 'expenditure[0][value]', class: 'form-control', step:0.01, placeholder: '0.00', type:'number' %>
         </div>
       </div>

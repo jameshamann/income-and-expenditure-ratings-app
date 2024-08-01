@@ -1,5 +1,6 @@
 class Statement < ApplicationRecord
-    validates :income, :expenditure, :month, presence: true
+    validates :month, presence: true
+    validate :amount_values_are_non_zero
     belongs_to :user
     before_save do
         self.total_income = save_totals(self.income)
@@ -11,11 +12,27 @@ class Statement < ApplicationRecord
 
    
     private
+
+    def amount_values_are_non_zero
+      if self.income && self.expenditure
+        inc = self.income.select{|k,v| v['value'].to_s.empty?}.count
+        exp = self.expenditure.select{|k,v| v['value'].to_s.empty?}.count
+        puts inc
+        if inc > 0
+          errors.add(:income, "Income Value must be greater than 0.")
+      elsif exp > 0
+          errors.add(:expenditure, "Expenditure Value must be greater than 0.")
+        end
+      else 
+        errors.add(:income, "Values must be greater than 0.")
+      end
+    end
+
     
     def save_totals(data)
         totals = 0.00
         if data.length == 1
-            totals = data["0"]['value']
+            totals = data["0"]['value'].to_f
         else
             data_arr = data.flatten
             totals = 0.00
