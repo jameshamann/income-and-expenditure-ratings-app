@@ -1,6 +1,6 @@
 class Statement < ApplicationRecord
     validates :month, presence: true
-    validate :amount_values_are_non_zero
+    validate :amount_values_are_not_zero
     belongs_to :user
     before_save do
         self.total_income = save_totals(self.income)
@@ -13,11 +13,10 @@ class Statement < ApplicationRecord
    
     private
 
-    def amount_values_are_non_zero
+    def amount_values_are_not_zero
       if self.income && self.expenditure
         inc = self.income.select{|k,v| v['value'].to_s.empty?}.count
         exp = self.expenditure.select{|k,v| v['value'].to_s.empty?}.count
-        puts inc
         if inc > 0
           errors.add(:income, "Income Value must be greater than 0.")
       elsif exp > 0
